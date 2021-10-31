@@ -118,7 +118,7 @@ namespace WindowsFormsApp1
                 Matrix4x4.CreatePerspectiv(
                     60,
                     (float)pictureBox1.Width / pictureBox1.Height,
-                    20,
+                    10,
                     60)
                 );
         }

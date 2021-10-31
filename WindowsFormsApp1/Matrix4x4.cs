@@ -30,22 +30,26 @@ namespace WindowsFormsApp1
         {
             get
             {
-                Matrix4x4 m = new Matrix4x4();
-                m.V00 = 1;
-                m.V11 = 1;
-                m.V22 = 1;
-                m.V33 = 1;
+                Matrix4x4 m = new Matrix4x4
+                {
+                    V00 = 1,
+                    V11 = 1,
+                    V22 = 1,
+                    V33 = 1
+                };
                 return m;
             }
         }
 
         public static Matrix4x4 CreateScale(float scale)
         {
-            var m = new Matrix4x4();
-            m.V00 = scale;
-            m.V11 = scale;
-            m.V22 = scale;
-            m.V33 = 1f;
+            var m = new Matrix4x4
+            {
+                V00 = scale,
+                V11 = scale,
+                V22 = scale,
+                V33 = 1f
+            };
 
             return m;
         }
@@ -123,13 +127,6 @@ namespace WindowsFormsApp1
             mat.V22 = (far + near) / (far - near);
             mat.V23 = 1;
             mat.V32 = (-2 * far + near) / (far - near);
-
-            /*mat.V00 = fov * aspect;
-            mat.V11 = fov;
-            mat.V22 = (far + near) / (far - near);
-            mat.V23 = 1;
-            mat.V32 = (2 * far + near) / (far - near);*/
-
 
             return mat;
         }
