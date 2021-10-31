@@ -17,13 +17,62 @@ namespace WindowsFormsApp1
 
         public void Draw(Graphics g, Matrix4x4 cameraMat)
         {
-            List<Vector4> lines = new List<Vector4>();
-
-            for (int i = -20; i <= 20; i++)
+            List<Vector4> lines = new List<Vector4>()
             {
-                lines.Add(new Vector4(i, 0, 21, 1));
-                lines.Add(new Vector4(i, 0, 100, 1));
-            }
+                //cube
+                new Vector4(-0.5f,-0.5f,-0.5f,1),
+                new Vector4(0.5f,-0.5f,-0.5f,1),
+
+                new Vector4(-0.5f,-0.5f,-0.5f,1),
+                new Vector4(-0.5f,0.5f,-0.5f,1),
+
+                new Vector4(-0.5f,-0.5f,-0.5f,1),
+                new Vector4(-0.5f,-0.5f,0.5f,1),
+
+
+                new Vector4(0.5f,0.5f,0.5f,1),
+                new Vector4(-0.5f,0.5f,0.5f,1),
+
+                new Vector4(0.5f,0.5f,0.5f,1),
+                new Vector4(0.5f,-0.5f,0.5f,1),
+
+                new Vector4(0.5f,0.5f,0.5f,1),
+                new Vector4(0.5f,0.5f,-0.5f,1),
+
+
+                new Vector4(0.5f,-0.5f,-0.5f,1),
+                new Vector4(0.5f,-0.5f,0.5f,1),
+
+                new Vector4(0.5f,-0.5f,-0.5f,1),
+                new Vector4(0.5f,0.5f,-0.5f,1),
+
+
+                new Vector4(-0.5f,0.5f,-0.5f,1),
+                new Vector4(0.5f,0.5f,-0.5f,1),
+
+                new Vector4(-0.5f,0.5f,-0.5f,1),
+                new Vector4(-0.5f,0.5f,0.5f,1),
+
+
+                new Vector4(-0.5f,-0.5f,0.5f,1),
+                new Vector4(0.5f,-0.5f,0.5f,1),
+
+                new Vector4(-0.5f,-0.5f,0.5f,1),
+                new Vector4(-0.5f,0.5f,0.5f,1),
+
+                //line y
+                new Vector4(0,0,0,1),
+                new Vector4(0,1,0,1),
+
+                //line x
+                new Vector4(0,0,0,1),
+                new Vector4(1,0,0,1),
+
+                //line z
+                new Vector4(0,0,0,1),
+                new Vector4(0,0,1,1),
+            };
+
 
             Pen[] pens = new Pen[] {
                 Pens.Red,
@@ -31,9 +80,12 @@ namespace WindowsFormsApp1
                 Pens.Blue,
             };
 
-            var translateMat = Matrix4x4.CreateTranslation(new Vector4(0, -23f, 0, 1));
-            var rotateMat = Matrix4x4.CreateRotationX((float)(2.5 * Math.PI / 180));
-            var scaleMat = Matrix4x4.CreateScale(1f);
+            var translateMat = Matrix4x4.CreateTranslation(new Vector4(0, 0, 5, 1));
+            float angleX = (float)(tbRotX.Value * Math.PI / 180);
+            float angleY = (float)(tbRotY.Value * Math.PI / 180);
+            float angleZ = (float)(tbRotZ.Value * Math.PI / 180);
+            var rotateMat = Matrix4x4.CreateFromYawPitchRoll(angleX, angleY, angleZ);
+            var scaleMat = Matrix4x4.CreateScale(2f);
 
             var totMat = translateMat * rotateMat * scaleMat;
 
@@ -64,11 +116,16 @@ namespace WindowsFormsApp1
             Draw(
                 e.Graphics,
                 Matrix4x4.CreatePerspectiv(
-                    120,
+                    60,
                     (float)pictureBox1.Width / pictureBox1.Height,
                     20,
-                    100)
+                    60)
                 );
+        }
+
+        private void tbRot_ValueChanged(object sender, EventArgs e)
+        {
+            pictureBox1.Refresh();
         }
     }
 
